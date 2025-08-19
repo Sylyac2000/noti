@@ -59,15 +59,25 @@ import { AuthService } from '../../services/keycloak.service';
 
           <div class="text-center">
             <h3 class="mb-3">Commencer maintenant</h3>
-            <div class="d-flex gap-3 justify-content-center" *ngIf="authService.isLoggedIn()">
-              <a routerLink="/notes/new" class="btn btn-primary btn-lg">
-                <i class="fas fa-plus me-2"></i>
-                Créer ma première note
-              </a>
-              <a routerLink="/notes" class="btn btn-outline-primary btn-lg">
-                <i class="fas fa-list me-2"></i>
-                Voir mes notes
-              </a>
+            <div *ngIf="authService.isLoggedIn()">
+              <div class="mb-3">
+                <span class="text-muted">Connecté en tant que : </span>
+                <strong>{{ authService.getUsername() }}</strong>
+              </div>
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a routerLink="/notes/new" class="btn btn-primary btn-lg">
+                  <i class="fas fa-plus me-2"></i>
+                  Créer ma première note
+                </a>
+                <a routerLink="/notes" class="btn btn-outline-primary btn-lg">
+                  <i class="fas fa-list me-2"></i>
+                  Voir mes notes
+                </a>
+                <button class="btn btn-outline-secondary btn-lg" (click)="logout()">
+                  <i class="fas fa-sign-out-alt me-2"></i>
+                  Se déconnecter
+                </button>
+              </div>
             </div>
             <div class="text-center" *ngIf="!authService.isLoggedIn()">
               <button class="btn btn-primary btn-lg" (click)="authService.login()">
@@ -84,4 +94,10 @@ import { AuthService } from '../../services/keycloak.service';
 })
 export class HomeComponent {
   authService = inject(AuthService);
+
+  logout(): void {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.authService.logout();
+    }
+  }
 }

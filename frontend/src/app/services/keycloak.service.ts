@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.keycloak.logout();
+    this.keycloak.logout(window.location.origin);
   }
 
   getToken(): Promise<string> {

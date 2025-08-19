@@ -45,20 +45,15 @@ import { AuthService } from '../../services/keycloak.service';
                 Se connecter
               </button>
             </li>
-            <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <li class="nav-item d-flex align-items-center" *ngIf="authService.isLoggedIn()">
+              <span class="navbar-text me-3">
                 <i class="fas fa-user me-1"></i>
-                {{ authService.getUsername() }}
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" (click)="$event.preventDefault()">
-                  <i class="fas fa-user-circle me-2"></i>Profil
-                </a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" (click)="authService.logout(); $event.preventDefault()">
-                  <i class="fas fa-sign-out-alt me-2"></i>Se déconnecter
-                </a></li>
-              </ul>
+                Bonjour, {{ authService.getUsername() }}
+              </span>
+              <button class="btn btn-outline-light btn-sm" (click)="logout()" title="Se déconnecter">
+                <i class="fas fa-sign-out-alt me-1"></i>
+                Déconnexion
+              </button>
             </li>
           </ul>
         </div>
@@ -69,4 +64,10 @@ import { AuthService } from '../../services/keycloak.service';
 })
 export class NavbarComponent {
   authService = inject(AuthService);
+
+  logout(): void {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      this.authService.logout();
+    }
+  }
 }
