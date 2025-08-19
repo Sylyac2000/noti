@@ -1,1 +1,9 @@
 /frontend/node_modules/
+# Ignore Angular cache and build outputs
+/frontend/.angular/
+/frontend/dist/
+
+# Ignore common build/IDE artifacts
+/backend/target/
+/.idea/
+/backend/.idea/

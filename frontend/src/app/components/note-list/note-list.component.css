@@ -1,0 +1,39 @@
+.note-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid #dee2e6;
+}
+
+.note-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.note-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  max-height: 4.2em;
+}
+
+.search-container {
+  max-width: 100%;
+}
+
+.card-title {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
